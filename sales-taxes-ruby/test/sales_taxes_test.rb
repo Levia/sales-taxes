@@ -1,3 +1,5 @@
+require_relative '../lib/item'
+require_relative '../lib/sales_taxes'
 require 'test/unit'
 
 class SalesTaxesTest < Test::Unit::TestCase
