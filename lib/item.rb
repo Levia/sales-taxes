@@ -20,7 +20,7 @@ class Item
 
   def receipt_line
     imported = self.is_imported ? ' imported' : ''
-    "#{self.amount}#{imported} #{self.name}: #{self.total_price}"
+    "#{self.amount}#{imported} #{self.name}: #{'%.2f' % self.total_price}"
   end
 
   private

@@ -21,8 +21,8 @@ class SalesTaxes
 
   def get_receipt
     receipt = @items.map(&:receipt_line)
-    receipt << "Sales Taxes: #{@taxes}"
-    receipt << "Total: #{@total}"
+    receipt << "Sales Taxes: #{'%.2f' % @taxes}"
+    receipt << "Total: #{'%.2f' % @total}"
     receipt.join("\n")
   end
 end
