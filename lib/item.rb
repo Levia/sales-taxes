@@ -18,6 +18,11 @@ class Item
     @total_price = calculate_total
   end
 
+  def receipt_line
+    imported = self.is_imported ? ' imported' : ''
+    "#{self.amount}#{imported} #{self.name}: #{self.total_price}"
+  end
+
   private
 
   def calculate_taxes

@@ -8,7 +8,7 @@ class SalesTaxes
   def run
     @taxes = calculate_taxes
     @total = calculate_total_price
-    { taxes: @taxes, total: @total }
+    p get_receipt
   end
 
   private
@@ -17,5 +17,12 @@ class SalesTaxes
     define_method("calculate_#{name}") do |*args|
       @items.inject(0) { |sum, item| sum + item.send(name) }.round(2)
     end
+  end
+
+  def get_receipt
+    receipt = @items.map(&:receipt_line)
+    receipt << "Sales Taxes: #{@taxes}"
+    receipt << "Total: #{@total}"
+    receipt.join("\n")
   end
 end
