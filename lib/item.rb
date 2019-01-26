@@ -18,6 +18,11 @@ class Item
     @total_price = calculate_total
   end
 
+  def receipt_line
+    imported = self.is_imported ? ' imported' : ''
+    "#{self.amount}#{imported} #{self.name}: #{'%.2f' % self.total_price}"
+  end
+
   private
 
   def calculate_taxes
@@ -28,12 +33,12 @@ class Item
     # as 0.05 is equal to 1/20 and the general formula is x * [y/x]
     # where y is the number to round, x is 0.05 and [y/x] is the smallest integer
     # greater than or equal to y/x
-    ((@price * taxes) * @amount * 20).ceil / 20.0
+    (((@price * taxes) * 20).ceil / 20.0) * @amount
     # So the above formula could also be written as
     #(0.05 * ((@price * taxes * @amount) / 0.05).ceil)
   end
 
   def calculate_total
-    (@price + @taxes).round(2)
+    (@price * @amount + @taxes).round(2)
   end
 end
